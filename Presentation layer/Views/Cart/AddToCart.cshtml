@@ -1,0 +1,107 @@
+﻿@model List<Product>
+
+<h2>Your Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    <div class="cart-container">
+        @foreach (var product in Model)
+        {
+            <div class="cart-item">
+                <div class="cart-image">
+                    <img src="~/image/@product.imagename" alt="@product.name" />
+                </div>
+                <div class="cart-details">
+                    <h5>@product.name</h5>
+                    <p>Price: @(product.price - (product.price * product.discount / 100)) EGP</p>
+                </div>
+                <div class="cart-actions">
+                    <a href="@Url.Action("getproduct", "Products", new { productid = product.id })" class="btn btn-primary btn-sm">
+                        View Product
+                    </a>
+                    <form asp-action="RemoveFromCart" asp-controller="Cart" method="post" style="display:inline;">
+                        <input type="hidden" name="productId" value="@product.id" />
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Remove
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+
+        <div class="cart-summary">
+            <h4>Total: @Model.Sum(p => (p.price - (p.price * p.discount / 100))) EGP</h4>
+
+            <div class="summary-buttons">
+                <form asp-action="EmptyCart" asp-controller="Cart" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-warning">Empty Cart</button>
+                </form>
+
+                <a href="@Url.Action("Checkout", "Cart")" class="btn btn-success">
+                    Buy Now
+                </a>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    .cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        padding: 15px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .cart-image img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    .cart-details {
+        flex-grow: 1;
+        margin-left: 20px;
+    }
+
+    .cart-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+        .cart-actions a,
+        .cart-actions button {
+            width: 120px;
+        }
+
+    .cart-summary {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #eef2f7;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .summary-buttons {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+</style>

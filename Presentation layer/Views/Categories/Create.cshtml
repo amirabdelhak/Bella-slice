@@ -1,0 +1,34 @@
+﻿@model DAL.Entity.Category
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_loginlayout";
+}
+
+<div class="form-page d-flex align-items-center justify-content-center min-vh-100">
+    <div class="form-card w-100" style="max-width: 760px;">
+        <h1 class="text-center mb-4">Create Category</h1>
+        <form asp-action="Create" asp-controller="Categories" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="Name" class="col-sm-3 col-form-label text-sm-center">Name</label>
+                <div class="col-sm-7">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center mt-2">
+                    <button type="submit" class="btn btn-light btn-lg custom-btn">Create</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

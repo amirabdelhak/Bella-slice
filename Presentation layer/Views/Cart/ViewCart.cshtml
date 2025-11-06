@@ -1,0 +1,124 @@
+@model IEnumerable<DAL.Entity.Product>
+
+@{
+    ViewData["Title"] = "Your Cart";
+}
+
+<div class="container py-5">
+    <h2 class="mb-4">Your Cart</h2>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-5">
+            <p class="lead">Your cart is empty.</p>
+            <a asp-controller="Product" asp-action="getall" class="btn btn-light custom-btn">Continue Shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            <div class="col-lg-8">
+                @foreach (var p in Model)
+                {
+                    <div class="card mb-3 shadow-sm">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-4 col-md-3">
+                                @if (!string.IsNullOrEmpty(p.imagename))
+                                {
+                                    <img src="~/image/@p.imagename" alt="@p.name" class="img-fluid rounded-start" style="height:120px; width:100%; object-fit:cover;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height:120px;">No image</div>
+                                }
+                            </div>
+
+                            <div class="col-8 col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-1">@p.name</h5>
+                                    <p class="card-text text-muted mb-2">@p.description</p>
+
+                                    @{
+                                        var discount = p.discount;
+                                        var normalized = discount > 1 ? discount / 100M : discount;
+                                        var hasDiscount = discount > 0M;
+                                        var finalPrice = hasDiscount ? p.price * (1 - normalized) : p.price;
+                                    }
+
+                                    @if (hasDiscount)
+                                    {
+                                        <div class="d-flex align-items-baseline gap-2">
+                                            <span class="badge bg-danger">@((discount > 1) ? discount.ToString("0.##") + "%" : (discount * 100M).ToString("0.##") + "%")</span>
+                                            <small class="text-muted"><del>@String.Format("{0:C}", p.price)</del></small>
+                                            <span class="fw-bold ms-2">@String.Format("{0:C}", finalPrice)</span>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="fw-bold">@String.Format("{0:C}", p.price)</div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-3">
+                                <div class="card-body d-flex flex-column align-items-end">
+                                    <a asp-action="getbyid" asp-controller="Product" asp-route-id="@p.id" class="btn btn-light custom-btn mb-2">Details</a>
+
+                                    <form asp-action="RemoveFromCart" asp-controller="Cart" method="post">
+                                        <input type="hidden" name="productId" value="@p.id" />
+                                        <button type="submit" class="btn btn-light custom-btn text-danger mb-2">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <aside class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Order Summary</h5>
+
+                        @{
+                            var items = Model.ToList();
+                            var itemCount = items.Count();
+                            decimal total = items.Sum(p =>
+                            {
+                                var discount = p.discount;
+                                var normalized = discount > 1 ? discount / 100M : discount;
+                                return discount > 0M ? p.price * (1 - normalized) : p.price;
+                            });
+                            
+                        }
+
+                        <p class="mb-1">Items: <strong>@itemCount</strong></p>
+                        <p class="mb-1">total: <strong>@String.Format("{0:C}", total)</strong></p>
+
+
+                        <form asp-controller="Checkout" asp-action="Checkout" method="post">
+                            <button type="submit" class="btn btn-success w-100 mb-2">Proceed to Checkout</button>
+                        </form>
+
+                        <form asp-action="EmptyCart" asp-controller="Cart" method="post">
+                            <button type="submit" class="btn btn-warning w-100">Empty Cart</button>
+                        </form>
+
+                        <a asp-controller="Product" asp-action="getall" class="btn btn-light custom-btn w-100 mt-3">Continue Shopping</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    }
+</div>
+
+<style>
+    .text-orange {
+        color: #d4552a;
+        font-weight: 700;
+    }
+
+    .card .card-body .btn {
+        min-width: 120px;
+    }
+</style>

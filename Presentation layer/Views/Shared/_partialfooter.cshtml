@@ -1,0 +1,47 @@
+﻿<footer id="footer-contact" class="footer-pizza text-white py-5 mt-5">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4 text-center text-md-start">
+                <img src="~/image/restaurantlogo.png" alt="Bella Slice" class="footer-logo mb-3">
+                <p>
+                    Experience the authentic taste of Italy with our freshly baked pizzas,
+                    crafted with love and the finest ingredients.
+                </p>
+            </div>
+
+            <div class="col-md-4 text-center">
+                <h5 class="fw-bold mb-3">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a asp-controller="Home" asp-action="Index" class="footer-link">Home</a></li>
+                    <li><a asp-controller="Product" asp-action="getall" class="footer-link">Menu</a></li>
+                    <li><a asp-controller="Cart" asp-action="ViewCart" class="footer-link">Cart</a></li>
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Account" asp-action="Logout" class="footer-link">Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="footer-link">Login</a>
+                        }
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-4 text-center text-md-end">
+                <h5 class="fw-bold mb-3">Follow Us</h5>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/amir.abdelhak.5?locale=ar_AR" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Famir.abdelhak.5%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExWktvcmNMbTNXaXBVWmtIM3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6Jm_KRteMYESZ88jKyIIv7KhEMZ-TtJWZu41lwZNIkjwKz7gMK_Bl0e_yx6w_aem_zGR-lOl_HbJuGHybWo0uwQ&h=AT2mjb6N3_Nn9z20OSoShwyVGGujET6DJet4LZw7rJdfe87Tnsh5O4dapC5629Dic5rMDH93GHOzdOd52TWeHTMs44H3npo8UBR6uy2EjsI3ji9pcOJyv-XP1oe8EO3SWB0v" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/amir-abdelhak/" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.2);">
+
+        <div class="text-center">
+            <small>&copy; @DateTime.Now.Year Bella Slice. All Rights Reserved.</small>
+        </div>
+    </div>
+</footer>

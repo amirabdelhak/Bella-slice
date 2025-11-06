@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Product>
+
+@{
+    Layout = "_mainlayout";
+    ViewData["Title"] = "Menu";
+    var categories = ViewBag.Categories as List<DAL.Entity.Category> ?? new List<DAL.Entity.Category>();
+    var selectedId = ViewBag.SelectedCategoryId as int? ?? 0;
+    var allClass = "list-group-item list-group-item-action" + (selectedId == 0 ? " active" : "");
+}
+
+<div class="container py-4">
+    <div class="row">
+        <!-- Sidebar: categories -->
+        <aside class="col-md-3 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Categories</h5>
+                    <div class="list-group">
+                        <a asp-action="getall" class="btn btn-light custom-btn me-2" class="@allClass">All</a>
+                        @foreach (var cat in categories)
+                        {
+                            var activeClass = "list-group-item list-group-item-action" + (cat.Id == selectedId ? " active" : "");
+                            <a asp-action="getproductbycategory" asp-route-categoryid="@cat.Id" class="btn btn-light custom-btn me-2" class="@activeClass">@cat.Name</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Products -->
+        <section class="col-md-9">
+            @if (User.IsInRole("admin") || User.IsInRole("buyer"))
+            {
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h4 mb-0">Products</h2>
+                    <a asp-action="create" class="btn btn-light custom-btn">Create New</a>
+                </div>
+            }
+            <div class="row g-3">
+                @foreach (var item in Model ?? Enumerable.Empty<Product>())
+                {
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card h-100">
+                            @if (!string.IsNullOrEmpty(item.imagename))
+                            {
+                                <img src="~/image/@item.imagename" class="card-img-top" alt="@item.name" style="height:180px;object-fit:cover;" />
+                            }
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">@item.name</h5>
+                                <p class="card-text mb-2">@item.description</p>
+
+                                @{ 
+                                    var discountValue = item.discount ;
+                                    var discountNormalized = discountValue > 1 ? discountValue / 100M : discountValue;
+                                    var hasDiscount = discountValue > 0M;
+                                    var discountedPrice = hasDiscount ? item.price * (1 - discountNormalized) : item.price;
+                                }
+
+                                @if (hasDiscount)
+                                {
+                                    <div class="mb-2">
+                                        <span class="badge bg-danger me-2">@((discountValue > 1) ? discountValue.ToString("0.##") + "%" : (discountValue * 100M).ToString("0.##") + "%")</span>
+                                        <span class="text-muted"><del>@String.Format("{0:C}", item.price)</del></span>
+                                        <strong class="ms-2">@String.Format("{0:C}", discountedPrice)</strong>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="mb-2"><strong>@String.Format("{0:C}", item.price)</strong></p>
+                                }
+                                @if (User.IsInRole("admin") || User.IsInRole("buyer"))
+                                {
+                                    <div class="mt-auto">
+                                        <a asp-action="update" asp-route-id="@item.id" class="btn btn-light custom-btn me-2">Edit</a>
+                                        <a asp-action="delete" asp-route-id="@item.id" class="btn btn-light custom-btn me-2" onclick="return confirm('Delete this product?');">Delete</a>
+                                    </div>
+                                }
+                                @if(User.IsInRole("customer"))
+                                {
+                                    <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mb-2">
+                                        <input type="hidden" name="productId" value="@item.id" />
+                                        <button type="submit" class="btn btn-success w-100">
+                                            Add to Cart
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (!(Model != null && Model.Any()))
+            {
+                <div class="alert alert-info mt-4">No products found for this category.</div>
+            }
+        </section>
+    </div>
+</div>
+

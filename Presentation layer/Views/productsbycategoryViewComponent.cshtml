@@ -1,0 +1,10 @@
+﻿@model IEnumerable<DAL.Entity.Product>
+
+<ul class="list-unstyled">
+@foreach(var p in Model ?? Enumerable.Empty<DAL.Entity.Product>())
+{
+    <li>
+        <a asp-controller="Product" asp-action="getbyid" asp-route-id="@p.id">@p.name</a>
+    </li>
+}
+</ul></ul>

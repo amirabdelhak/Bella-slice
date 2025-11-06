@@ -1,0 +1,81 @@
+﻿@model DAL.Entity.Product
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_loginlayout";
+}
+
+<div class="form-page d-flex align-items-center justify-content-center min-vh-100">
+    <div class="form-card w-100" style="max-width: 760px;">
+        <form asp-action="Create" method="post" enctype="multipart/form-data" class="needs-validation" >
+            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="name" class="col-sm-3 col-form-label text-sm-center">name</label>
+                <div class="col-sm-7">
+                    <input asp-for="name" class="form-control" />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="description" class="col-sm-3 col-form-label text-sm-center">description</label>
+                <div class="col-sm-7">
+                    <input asp-for="description" class="form-control" />
+                    <span asp-validation-for="description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="price" class="col-sm-3 col-form-label text-sm-center">price</label>
+                <div class="col-sm-7">
+                    <input asp-for="price" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="price" class="text-danger"></span>
+                </div>
+            </div>
+
+           
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="image" class="col-sm-3 col-form-label text-sm-center">image</label>
+                <div class="col-sm-7">
+                    <input asp-for="image" class="form-control" type="file" />
+                    <span asp-validation-for="image" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="discount" class="col-sm-3 col-form-label text-sm-center">discount</label>
+                <div class="col-sm-7">
+                    <input asp-for="discount" class="form-control" type="number" step="0.01" />
+                    <span asp-validation-for="discount" class="text-danger"></span>
+                </div>
+            </div>
+
+           
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="Categoryid" class="col-sm-3 col-form-label text-sm-center">Categoryid</label>
+                <div class="col-sm-7">
+                    <select asp-for="Categoryid" class="form-control" asp-items="ViewBag.Categories">
+                    <option value="">-- Select Category --</option>
+                    </select>
+                    <span asp-validation-for="Categoryid" class="text-danger"></span>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center mt-2">
+                    <button type="submit" class="btn btn-light btn-lg custom-btn">Create</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,422 @@
+﻿/* site.css */
+* {
+    margin: 0;
+    padding: 0;
+}
+.navbar-pizza {
+    background: rgba(212, 85, 42, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+    min-height: 70px;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 0.3rem 1rem; 
+}
+.navbar-nav {
+    gap: 2rem;
+}
+
+.navbar-logo {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+    .navbar-logo:hover {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+.nav-link {
+    color: #fff !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem !important;
+    position: relative;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+    .nav-link:hover {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+    padding: 0.5rem 0.75rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 1.8em;
+    height: 1.8em;
+}
+
+@media (max-width: 991px) {
+    .navbar-pizza {
+        padding: 0.8rem 0;
+        min-height: 50px;
+    }
+
+    .navbar-nav {
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .navbar-logo {
+        height: 45px;
+    }
+}
+
+.wave-text span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.wave-text:hover span {
+    animation: wave 0.6s ease-in-out;
+}
+
+    .wave-text:hover span:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .wave-text:hover span:nth-child(2) {
+        animation-delay: 0.1s;
+    }
+
+    .wave-text:hover span:nth-child(3) {
+        animation-delay: 0.2s;
+    }
+
+    .wave-text:hover span:nth-child(4) {
+        animation-delay: 0.3s;
+    }
+
+    .wave-text:hover span:nth-child(5) {
+        animation-delay: 0.4s;
+    }
+
+    .wave-text:hover span:nth-child(6) {
+        animation-delay: 0.5s;
+    }
+
+    .wave-text:hover span:nth-child(7) {
+        animation-delay: 0.6s;
+    }
+
+    .wave-text:hover span:nth-child(8) {
+        animation-delay: 0.7s;
+    }
+
+    .wave-text:hover span:nth-child(9) {
+        animation-delay: 0.8s;
+    }
+
+    .wave-text:hover span:nth-child(10) {
+        animation-delay: 0.9s;
+    }
+
+@keyframes wave {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+.footer-pizza {
+    background: rgba(212, 85, 42, 0.95);
+    backdrop-filter: blur(8px);
+    color: #fff;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-logo {
+    height: 90px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    margin: 0.3rem 0;
+    transition: all 0.3s ease;
+}
+
+    .footer-link:hover {
+        color: #ffe4c4;
+        transform: translateX(5px);
+    }
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    justify-content: end;
+    gap: 1rem;
+}
+
+.social-icon {
+    color: #fff;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+    .social-icon:hover {
+        color: #ffe4c4;
+        transform: scale(1.2);
+    }
+
+@media (max-width: 767px) {
+    .social-icons {
+        justify-content: center;
+    }
+}
+/* --- Sticky Footer Layout --- */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+body.no-navbar {
+    /* Remove top margin for login pages */
+    margin-top: 0;
+}
+
+/* ===== Hero Section ===== */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background: url('../image/pizza.PNG') center center/cover no-repeat;
+    overflow: hidden;
+}
+
+    .hero-section .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.55); /* غامق بسيط عشان الكلام يوضح */
+        z-index: 1;
+    }
+
+    .hero-section .content {
+        position: relative;
+        z-index: 2;
+        max-width: 700px;
+        padding: 0 15px;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-section p {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+.text-highlight {
+    color: #FFD580; /* لون دهبي خفيف يليق على البرتقالي */
+}
+
+.hero-section .btn {
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+}
+
+    .hero-section .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.3);
+    }
+
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-section p {
+        font-size: 1rem;
+    }
+}
+
+
+/* --- زر View Menu مع نبضة --- */
+.custom-btn {
+    background-color: #fff;
+    color: #d4552a;
+    border: 2px solid #fff;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    border-radius: 30px;
+}
+
+    .custom-btn:hover {
+        background-color: #d4552a; /* نفس لون النافبار */
+        color: #fff;
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(212, 85, 42, 0.6);
+        animation: pulse 0.8s ease-in-out;
+    }
+
+/* --- أنيميشن النبض --- */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(212, 85, 42, 0.6);
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(212, 85, 42, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(212, 85, 42, 0.6);
+    }
+}
+
+
+.about-section {
+    color: #ff7f00;  
+}
+
+    .about-section h2 {
+        color: #ff8800;  عنوان بلون أغمق شوية 
+        font-weight: 700;
+    }
+
+    .about-section p {
+        color: #ffa347; /* نص بلون أفتح شوية */
+        line-height: 1.8;
+    }
+
+
+.chefs-section {
+    background: url('../image/pizza.PNG') center center/cover fixed no-repeat;
+    position: relative;
+    z-index: 1;
+}
+
+    .chefs-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.6);
+        z-index: -1;
+    }
+
+.section-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+}
+
+.chef-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+}
+
+    .chef-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 25px rgba(212, 85, 42, 0.7);
+    }
+
+.chef-photo {
+    width: 100%;
+    border-radius: 50%;
+    border: 3px solid #d4552a;
+    transition: transform 0.3s ease;
+}
+
+.chef-card:hover .chef-photo {
+    transform: scale(1.05);
+}
+
+.text-orange {
+    color: #d4552a;
+    font-weight: 600;
+}
+.chefs-section .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+.chef-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    height: 100%; /* ده المهم */
+}
+
+/* Apply navbar offset only when navbar is present */
+body:not(.no-navbar) main {
+    margin-top: 75px; /* عشان المحتوى يبدأ بعد النافبار */
+}
+
+/* Active link highlight for navbar */
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff !important;
+    box-shadow: 0 6px 18px rgba(212, 85, 42, 0.35);
+    border-radius: 8px;
+    transform: translateY(-2px);
+    transition: all 0.25s ease;
+}
+
+/* Give wave-text links a subtle glow when active */
+.nav-link.wave-text.active {
+    box-shadow: 0 0 14px rgba(212, 85, 42, 0.6);
+    color: #FFD580 !important;
+}
+
+/* Ensure active state transitions smoothly on hover/click */
+.nav-link.active:hover {
+    transform: translateY(-3px);
+}
+
+
+
+
+
+
+
+
+
+

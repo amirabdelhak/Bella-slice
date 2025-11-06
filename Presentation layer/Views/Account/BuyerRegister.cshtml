@@ -1,0 +1,103 @@
+﻿@using Presentation_layer.VM
+@model BuyerRegistervm
+
+@{
+    ViewData["Title"] = "add buyer";
+    Layout = "_loginlayout";
+}
+
+<div class="form-page d-flex align-items-center justify-content-center min-vh-100">
+    <div class="form-card w-100" style="max-width: 760px;">
+        <h1 class="text-center mb-4">Create Role</h1>
+        <form asp-action="BuyerRegister" asp-controller="Account" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="username" class="col-sm-3 col-form-label text-sm-center">username</label>
+                <div class="col-sm-7">
+                    <input asp-for="username" class="form-control" />
+                    <span asp-validation-for="username" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="FirstName" class="col-sm-3 col-form-label text-sm-center">FirstName</label>
+                <div class="col-sm-7">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="LastName" class="col-sm-3 col-form-label text-sm-center">LastName</label>
+                <div class="col-sm-7">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="password" class="col-sm-3 col-form-label text-sm-center">Password</label>
+                <div class="col-sm-7">
+                    <input asp-for="password" class="form-control" type="password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="ConfirmPassword" class="col-sm-3 col-form-label text-sm-center">ConfirmPassword</label>
+                <div class="col-sm-7">
+                    <input asp-for="ConfirmPassword" class="form-control" type="password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="Address" class="col-sm-3 col-form-label text-sm-center">Address</label>
+                <div class="col-sm-7">
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="age" class="col-sm-3 col-form-label text-sm-center">age</label>
+                <div class="col-sm-7">
+                    <input asp-for="age" class="form-control" />
+                    <span asp-validation-for="age" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="phoneNumber" class="col-sm-3 col-form-label text-sm-center">phoneNumber</label>
+                <div class="col-sm-7">
+                    <input asp-for="phoneNumber" class="form-control" />
+                    <span asp-validation-for="phoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 text-center mt-2">
+                    <button type="submit" class="btn btn-light btn-lg custom-btn">add buyer</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

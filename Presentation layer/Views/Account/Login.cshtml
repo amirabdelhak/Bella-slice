@@ -1,0 +1,55 @@
+﻿@using Presentation_layer.VM
+@model loginvm
+
+@{
+    ViewData["Title"] = "login";
+    Layout = "_loginlayout";
+}
+
+<div class="form-page d-flex align-items-center justify-content-center min-vh-100">
+    <div class="form-card w-100" style="max-width: 760px;">
+        <h1 class="text-center mb-4">Login</h1>
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-2"></div>
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="username" class="col-sm-3 col-form-label text-sm-center">username</label>
+                <div class="col-sm-7">
+                    <input asp-for="username" class="form-control" />
+                    <span asp-validation-for="username" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="row mb-3 justified align-items-center">
+                <label asp-for="password" class="col-sm-3 col-form-label text-sm-center">Password</label>
+                <div class="col-sm-7">
+                    <input asp-for="password" class="form-control" type="password" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            
+
+            <div class="row">
+                <div class="col-12 text-center mt-2">
+                    <button type="submit" class="btn btn-light btn-lg custom-btn">login</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-2">
+                    <a asp-action="CustomerRegister" class="btn btn-light btn-lg custom-btn">register</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

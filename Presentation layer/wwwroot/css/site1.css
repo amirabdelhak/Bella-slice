@@ -1,0 +1,80 @@
+﻿/* Additional form styles for create page */
+
+/* Full-page background for pages using the login layout (no navbar) */
+body.no-navbar {
+    background: url('../image/pizza.PNG') center center/cover no-repeat fixed;
+    min-height: 100vh;
+    background-color: #000; /* fallback */
+}
+
+/* Remove the navbar offset for login pages */
+body.no-navbar main {
+    margin-top: 0 !important;
+    padding: 0;
+}
+
+.form-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 213, 128, 0.18); /* soft yellow tint, semi-transparent */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 1.75rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    color: #111;
+}
+
+.form-card .col-form-label {
+    font-weight: 600;
+    color: #111;
+}
+
+.form-card .form-control {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.form-card .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(212, 85, 42, 0.12);
+}
+
+/* Center row contents inside the card (labels + inputs) */
+.form-card .row.justified {
+    justify-content: center;
+}
+
+@media (max-width: 575.98px) {
+    /* On very small screens stack label above input */
+    .form-card .col-form-label {
+        text-align: left !important;
+        margin-bottom: 0.3rem;
+    }
+
+    .form-card .row.align-items-center {
+        align-items: flex-start;
+    }
+}
+
+/* Page-level container for the form. Keep transparent so the body background shows through. */
+.form-page {
+    position: relative;
+    min-height: 100vh;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow: hidden;
+}
+
+.form-page::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35); /* dark overlay for contrast */
+    z-index: 0;
+}
+
+/* Keep custom-btn behavior defined in site.css */
+

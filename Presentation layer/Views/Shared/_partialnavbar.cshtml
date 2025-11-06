@@ -1,0 +1,92 @@
+﻿@using System.Text.Json
+
+﻿@{
+    var cartCookie = Context.Request.Cookies["cart"];
+    int cartCount = 0;
+
+    if (!string.IsNullOrEmpty(cartCookie))
+    {
+        var cartItems = cartCookie.Split(",").ToList();
+        cartCount = cartItems.Count;
+    }
+}
+<nav class="mynav navbar navbar-expand-lg navbar-pizza">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav mx-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Index" asp-controller="Home">
+                        <img src="~/image/restaurantlogo.png" alt="Bella Slice" class="navbar-logo">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link wave-text" asp-action="getall" asp-controller="Product">
+                        <span>M</span><span>e</span><span>n</span><span>u</span>
+                    </a>
+                </li>
+                @* <li class="nav-item">
+                    <a class="nav-link" asp-action="ViewCart" asp-controller="Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
+                </li> *@
+                @if (User.Identity.IsAuthenticated){
+                <div class="nav-icon position-relative me-3" id="cartIcon">
+                    <a class="nav-link p-0" asp-action="ViewCart" asp-controller="Cart" title="Cart" id="cartLink">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
+                    @if (cartCount > 0)
+                    {
+                        <span id="cartCountBadge" class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">@cartCount</span>
+                    }
+                </div>
+                }
+
+                <li class="nav-item">
+                    <a class="nav-link wave-text" href="#footer-contact">
+                        <span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span><span> </span><span>U</span><span>s</span>
+                    </a>
+                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link wave-text" asp-action="Logout" asp-controller="Account">
+                            <span>L</span><span>o</span><span>g</span><span>o</span><span>u</span><span>t</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link wave-text" asp-action="Login" asp-controller="Account">
+                            <span>L</span><span>o</span><span>g</span><span>i</span><span>n</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link wave-text" asp-action="CustomerRegister" asp-controller="Account">
+                            <span>R</span><span>e</span><span>g</span><span>i</span><span>s</span><span>t</span><span>e</span><span>r</span>
+                        </a>
+                    </li>
+                }
+
+
+                @if (User.IsInRole("admin"))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link wave-text" asp-action="BuyerRegister" asp-controller="Account">
+                            <span>B</span><span>u</span><span>y</span><span>e</span><span>r</span><span>R</span><span>e</span><span>g</span><span>i</span><span>s</span><span>t</span><span>e</span><span>r</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link wave-text" asp-action="Add" asp-controller="Role">
+                            <span>A</span><span>d</span><span>d</span><span>R</span><span>o</span><span>R</span><span>o</span><span>l</span><span>e</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</nav>
