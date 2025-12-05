@@ -66,8 +66,8 @@ namespace Presentation_layer.Controllers
                 },
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:44392/Order/Add/",
-                CancelUrl = "https://localhost:44392/Cart/ViewCart/",
+                SuccessUrl = "https://bellaslice.runasp.net/Order/Add/",
+                CancelUrl = "https://bellaslice.runasp.net/Cart/ViewCart/",
             };
 
             var service = new Stripe.Checkout.SessionService();

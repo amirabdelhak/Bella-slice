@@ -10,9 +10,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Presentation_layer.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CategoriesController : Controller
     {
         private readonly Icategorymanager categorymanager;
